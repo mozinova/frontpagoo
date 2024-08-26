@@ -1,0 +1,40 @@
+<style>
+  button{
+    margin-top:5px;
+  }
+  input{
+    margin-bottom:4px;
+  }
+</style>
+<ons-page id="index" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background:#fff;">
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-0">pagoo </h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <b>Solicitar Pagamento</b>
+         
+        </nav>
+        <alert-success></alert-success>
+        <p>podes solicitar pagamentos para 1 pessoa por vez</p>
+        <main>
+          <div class="form-floating mb-3">
+            <input type="text" placeholder="usuário a solicitar" class="form-control" ng-model="Reqpayment.target">
+            <label for="">contacto do usuário a solicitar pagamento:</label>
+          </div>
+          
+          <div class="form-floating mb-3">
+            <input type="number" placeholder="valor a solicitar" class="form-control" ng-model="Reqpayment._value">
+            <label for="">valor a solicitar :</label>
+          </div>
+          <font color="red">
+            <label for="">{{ requestPayment.error }}</label>
+          </font>
+          <button ng-click="Reqpayment.send()" class="form-control btn btn-primary">processar</button>
+          <button onclick="history.go(-1)" class="btn btn-light form-control">cancelar</button>
+        </main>
+      </div>
+    </header>
+  </div>
+</ons-page>

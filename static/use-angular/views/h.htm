@@ -1,0 +1,22 @@
+<ons-page>
+  <ons-toolbar>
+    <div class="left">
+      <ons-toolbar-button onclick="window.history.go(-1)">
+        voltar
+      </ons-toolbar-button>
+    </div>
+    <div class="center">
+      Histórico de transações 
+    </div>
+  </ons-toolbar>
+  <ons-list>
+    <ons-list-title> Histórico </ons-list-title>
+    <div ng-repeat="item in transactions">
+      <ons-list-item>
+        <div class="left">
+          {{ item }}
+        </div>
+      </ons-list-item>
+    </div>
+  </ons-list>
+</ons-page>

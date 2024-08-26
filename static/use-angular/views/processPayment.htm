@@ -1,0 +1,77 @@
+
+<ons-page id="index" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background:#fff;">
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-0">pagoo </h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <b>Confirmar Solicitação </b>
+         
+        </nav>
+        <alert-success></alert-success>
+        <div id="confirm-place" style="display:{{ confirmPlaceState }}">
+          <center><div class="loading"></div>
+          <p>a processar</p></center>
+        </div>
+      </div>
+      <div style="display:{{ transactionDetailsState }}">
+        <ons-list>
+      <ons-list-item>
+      <div class="left">
+     <ons-icon icon="fa-phone" size="large" style="color:green"></ons-icon> para:
+      </div>
+      <div class="right">
+      {{data_to_send.contact}}
+      </div>
+      </ons-list-item>
+      
+      <ons-list-item>
+      <div class="left">
+      
+     <ons-icon icon="fa-user" size="large" style="color:green"></ons-icon>
+      nome:
+      </div>
+      <div class="right">
+      {{data_to_send.accountName}}
+      </div>
+      </ons-list-item>
+      <ons-list-item>
+      <div class="left">
+      <ons-icon icon="fa-coins" size="large" style="color:green"></ons-icon>
+      valor:
+      </div>
+      <div class="right">
+      {{data_to_send._value}} MZN
+      </div>
+      </ons-list-item>
+      
+      <ons-list-item>
+      <div class="left">
+     <ons-icon icon="fa-percent" size="large" style="color:green"></ons-icon> taxa da transação:
+      </div>
+      <div class="right">
+      {{data_to_send._fee}} MZN
+      </div>
+      </ons-list-item>
+      
+      <ons-list-item>
+      <div class="left">
+      <ons-icon icon="fa-calculator" size="large" style="color:green"></ons-icon>
+      total:
+      </div>
+      <div class="right">
+      {{data_to_send.total_value}} MZN
+      </div>
+      </ons-list-item>
+      </ons-list>
+      </div>
+    </header>
+    
+      <main>
+        <button class="btn btn-light form-control" style="margin-bottom:1.5rem" ng-click="cancelT(data_to_send.id)">cancelar</button>
+        <button class="btn btn-primary form-control" ng-click="finalize(data_to_send.id);">
+          <ons-icon size="large" icon="fa-check"></ons-icon> confirmar</button>
+      </main> 
+  </div>
+</ons-page>

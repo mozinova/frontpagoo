@@ -1,0 +1,30 @@
+<ons-page>
+  <ons-toolbar>
+    <div class="left">
+      <ons-toolbar-button onclick="window.history.go(-1)">
+        voltar
+      </ons-toolbar-button>
+    </div>
+    <div class="center">
+      Mudar Palavra passe 
+    </div>
+  </ons-toolbar>
+  <div>
+    Mude sua palavra passe, para tornar a conta mais segura
+  </div>
+  <ons-card>
+    <div class="form-floating mb-3">
+      <input type="password" placeholder="palavra passe antiga" ng-model="passwordManager.oldPassword" class="form-control">
+      <label for="">insira a sua palavra passe antiga:</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input type="password" placeholder="palavra passe antiga" ng-model="passwordManager.newPassword" class="form-control">
+      <label for="">insira a sua nova palavra passe:</label>
+    </div>
+    <font color="red">
+      <small>{{ passwordManager.error }}
+      </small>
+    </font>
+    <button class="btn btn-primary form-control" ng-click="changePassword()">continuar</button>
+  </ons-card>
+</ons-page>

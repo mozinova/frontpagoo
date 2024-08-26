@@ -1,0 +1,82 @@
+<style>
+  body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background-color: white;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 350px;
+            padding: 2rem;
+            background-color: #ffffff;
+            /*box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);*/
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .login-card img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .login-card input {
+            border-radius: 25px;
+            margin-bottom: 1rem;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .login-card button {
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007bff;
+            border: none;
+        }
+
+        .login-card button:hover {
+            background-color: #0056b3;
+        }
+</style>
+<ons-page id="index" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background:#fff;">
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-0">pagoo </h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+            
+    <div class="login-container">
+        <div class="login-card">
+          <img src="/static/wallet/icons/InShot_20240815_060556902.jpg" alt=""><br>
+            <b>Entre na sua conta</b>
+            <input type="text" class="form-control" placeholder="Número de telefone ou email" ng-model="user_auth.contact">
+            <input type="password" class="form-control" placeholder="Senha" ng-model="user_auth.password">
+            <font color="red">
+              <small>
+                {{ errorPlace }}
+              </small>
+            </font>
+            <button class="btn btn-primary btn-block w-100" ng-click="login ()">{{ loginTextState }}</button>
+            <br><br>
+            <button onclick="useBiometric()" style="display:{{ canUseBiometric }};color:white" class="btn btn-outline-primary w-100 btn-block">usar impressão digital </button>
+        </div>
+    </div>
+
+        </nav>
+    </header>
+    <main>
+        </div>
+    </main>
+  </div>
+</ons-page>

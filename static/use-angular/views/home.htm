@@ -1,0 +1,73 @@
+
+    <ons-page id="index" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+   
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background:#fff;">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">pagoo </h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" ng-click="restore()">inicio</a>
+        <!--<a class="nav-link" href="#menu">menu</a>-->
+      </nav>
+    </div>
+    <div id="content"></div>
+    <ons-card class="balance-card">
+      <p class="balance-header">
+        <img src="/static/wallet/icons/Gemini_Generated_Image_sgw3nrsgw3nrsgw3.jpeg" height ="50px" width="50px" style="border-radius:50%" alt=""> <b class="balance-label" id="username">{{userData.name+" "+userData.surname}}</b>
+      </p>
+      <p class="">
+        <span class="balance" >MZN<span id="user-balance">{{ " "+userData.cash }}</span></span>
+      </p>
+      <ons-row class="row">
+        <ons-col width="25%">
+        <button class="btn btn-send"
+        ng-click="setToolState('send_money')"><ons-icon icon="fa-paper-plane" size="large"></ons-icon></button>
+        </ons-col>
+       
+        <ons-col Width="25%"><button class="btn btn-light" ng-click="setToolState('withdraw')" data-title="" data-description=""data-wrapper="#withdraw" id="withdraw" ><ons-icon icon="fa-money-bill-wave"size="large"></ons-icon></button></ons-col>
+        <ons-col Width="25%"><button class="btn btn-light"
+          ng-click="setToolState('pay')"
+          data-title=""  data-description=""data-wrapper="#pay" ><ons-icon icon="fa-credit-card"size="large"></ons-icon></button></ons-col>
+        <ons-col Width="25%"><button class="btn btn-light" ng-click="setToolState('qr_code')"  ><ons-icon icon="fa-qrcode"size="large"></ons-icon></button></ons-col>
+      </ons-row>
+    </ons-card>
+    <div id="body" >
+      <div style="display:{{bodyState}}">
+      <h1>
+      <div class="tag-title" id="i-title">
+        {{ toolTitle }}
+      </div>
+      </h1>
+      <p>
+        <cite id="description">
+          {{ toolDescription}}
+        </cite>
+      </p>
+      <div>
+        <withdraw-view style="display:{{tools.withdraw}}"></withdraw-view>
+        <sendmoney-view style="display:{{tools.send_money}}"></sendmoney-view>
+        <pay-view style="display:{{tools.pay}}"></pay-view>
+        <qrcode-view style="display:{{tools.qr_code}}"></qrcode-view>
+        
+      </div>
+      </div>
+      <div id="main-body" style="display:{{toolIsActive}}">
+        <ons-list ng-repeat="item in mainmenu">
+          <ons-list-item tappable modifier="chevron" ng-click="menuItemClicked(item.click)">
+              <div class="left">
+    
+  <img src="{{item.img}}" alt="" class="list-item__thumbnail"> 
+  </div>
+  <div class="center" >
+    {{ item.content}}
+  </div>
+</ons-list-item>
+
+</ons-list>
+      </div>
+    </div>
+  </header>
+
+ 
+</div>
+    </ons-page>

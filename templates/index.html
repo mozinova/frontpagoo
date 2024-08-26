@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Substituindo Onsen UI CSS por CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/onsenui/css/onsenui.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/onsenui/css/onsen-css-components.min.css">
+  
+  <!-- Substituindo Onsen UI JS por CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/onsenui/js/onsenui.min.js"></script>
+
+  <!-- Substituindo Bootstrap CSS por CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- Substituindo Bootstrap JS por CDN -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  
+  <title>App2</title>
+</head>
+
+<style>
+/* Seu CSS personalizado permanece inalterado */
+.modal {
+    position: fixed;
+    z-index: 9999999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fff;
+    color: black;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.loading {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 80px;
+    height: 80px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+input,ons-button.form-control{
+  margin-top:2rem;
+}
+.row button{
+  
+}
+  .balance-label {
+  font-size: 16px;
+}
+
+.balance-amount {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.balance {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.balance-card {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+</style>
+
+</head>
+
+<body>
+  <div ng-app="mainapp" id="app">
+    <div ng-controller="mainCtrl">
+      <div ng-view></div>
+    </div>
+  </div>
+
+ <script>
+  try{
+    const token=window.sessionStorage.getItem("token");
+    if (token==null){
+      window.location.href="#!/login";
+    }
+    
+  }catch(e){
+    throw new Error(e);
+  }
+ </script>
+ 
+ <!-- Substituindo AngularJS por CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
+ 
+ <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
+ <script src="{{ url_for('static',filename='/use-angular/app.js')}}"></script>
+ 
+ <!-- Substituindo QRCode e SweetAlert por CDN -->
+ <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+</body>
+
+</html>

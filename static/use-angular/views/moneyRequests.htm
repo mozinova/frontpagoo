@@ -1,0 +1,20 @@
+<ons-page>
+  <ons-toolbar>
+    <div class="left">
+      <ons-toolbar-button onclick="history.go(-1)">voltar</ons-toolbar-button>
+    </div>
+    <div class="center">
+      Solicitações de Pagamentos
+    </div>
+  </ons-toolbar>
+  <ons-list ng-repeat="x in requests">
+    <ons-list-item tappable modifier="chevron" ng-click="processRequest(x)">
+      <div class="left">
+        <img src="/wallet/icons/images (9).png" class="list-item__thumbnail" alt="">
+      </div>
+      <div class="center">
+        <b>{{ x.contact }}</b>, nome:{{x.accountName}}, solicitou {{x._value}} MT, às {{x._date}}
+      </div>
+    </ons-list-item>
+  </ons-list>
+</ons-page>

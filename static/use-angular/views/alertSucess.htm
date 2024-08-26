@@ -1,0 +1,13 @@
+<div id="alertModal" class="modal" style="display:{{ alert_state }}">
+  <div class="modal-content">
+    <span class="close" ng-click="goto('')">&times;</span>
+    <center>
+      <img src="{{ imgDone }}" alt="" id="avatar-in">
+    <p>{{ transactionState }}</p>
+    </center>
+    <h3>
+      <p id="class"></p>
+      <ons-button ng-click="goto('')" class="form-control btn-primary">ok</ons-button>
+    </h3>
+  </div>
+</div>
