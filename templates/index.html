@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- Substituindo Onsen UI CSS por CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/onsenui/css/onsenui.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/onsenui/css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="/static/res/css/onsenui.min.css">
+  <link rel="stylesheet" href="/static/res/css/onsen-css-components.min.css">
   
   <!-- Substituindo Onsen UI JS por CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/onsenui/js/onsenui.min.js"></script>
+  <script src="/static/res/js/onsenui.min.js"></script>
 
   <!-- Substituindo Bootstrap CSS por CDN -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
   
   <!-- Substituindo Bootstrap JS por CDN -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
   
   <title>App2</title>
 </head>
@@ -144,12 +144,13 @@ input,ons-button.form-control{
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular-route.min.js"></script>
  
+ <!-- Substituindo QRCode e SweetAlert por CDN -->
+ <script src="/static/qrcode.min.js"></script>
+ <script src="/static/js/sweetalert.min.js"></script>
+ 
  <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
  <script src="{{ url_for('static',filename='/use-angular/app.js')}}"></script>
  
- <!-- Substituindo QRCode e SweetAlert por CDN -->
- <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </body>
 
