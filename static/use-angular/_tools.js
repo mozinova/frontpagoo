@@ -69,26 +69,26 @@ const _mainPageTools={
 const mainPageList=[
   
   {
-    img:"/wallet/icons/images (9).png",
+    img:"/static/wallet/icons/images (9).png",
     content:"Pedidos de pagamentos",
     click:"payRequests"
   },
   {
-    img:"/wallet/icons/images (5).png",
+    img:"/static/wallet/icons/images (5).png",
     content:"Mudar palavra passe",
     click:"changePasswordPage"
   },
   {
-    img:"/wallet/icons/images (11).png",
+    img:"/static/wallet/icons/images (11).png",
     content:"Ler código QR",
     click:"scanQrCode"
   },
  {
-   img:"/wallet/icons/images (8).png",content :"Histórico da conta",
+   img:"/static/wallet/icons/images (8).png",content :"Histórico da conta",
    click:'viewHistory'
  },
  {
-   img:"/wallet/icons/images (6).png",
+   img:"/static/wallet/icons/images (6).png",
    content:"Terminar Sessão",
   click:"logout"
  }

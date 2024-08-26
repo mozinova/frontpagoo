@@ -131,7 +131,7 @@ $scope.userData={};
     if($scope.userData._type=="business" && mainPageList[mainPageList.length-1]["click"]=="logout"){
       mainPageList.push({
         content:"Solicitar pagamento",
-        img:"/wallet/icons/transferir (4).jpeg",
+        img:"/static/wallet/icons/transferir (4).jpeg",
         click:"requestPayment"
       });
     }
@@ -546,21 +546,21 @@ swal({
 
 app.config(["$routeProvider",($route)=>{
   $route.when("/",{
-    templateUrl:"./views/home.htm"
+    templateUrl:"/static/use-angular/views/home.htm"
   }).when("/login",{
-    templateUrl:"./views/login.htm"
+    templateUrl:"/static/use-angular/views/login.htm"
   }).when("/confirm",{
-    templateUrl:"./views/confirm.htm"
+    templateUrl:"/static/use-angular/views/confirm.htm"
   }).when("/history",{
-    templateUrl:"./views/h.htm"
+    templateUrl:"/static/use-angular/views/h.htm"
   }).when("/change-password",{
-    templateUrl:"./views/ch.htm"
+    templateUrl:"/static/use-angular/views/ch.htm"
   }).when("/paymentRequests",{
-    templateUrl:"./views/moneyRequests.htm"
+    templateUrl:"/static/use-angular/views/moneyRequests.htm"
   }).when("/requestPayment",{
-    templateUrl:'./views/requestMoney.htm'
+    templateUrl:'/static/use-angular/views/requestMoney.htm'
   }).when("/processRequest",{
-    templateUrl:"./views/processPayment.htm"
+    templateUrl:"/static/use-angular/views/processPayment.htm"
   })
   .otherwise ({
     redirectTo:'/'
@@ -578,7 +578,7 @@ app.directive("sendmoneyView",()=>{
 });
 app.directive("alertSuccess",()=>{
   return{
-    templateUrl:"./views/alertSucess.htm"
+    templateUrl:"/static/use-angular/views/alertSucess.htm"
   };
 });
 app.directive("payView",()=>{
