@@ -131,6 +131,10 @@ input,ons-button.form-control{
  <script>
   try{
     const token=window.sessionStorage.getItem("token");
+    const lastUsedContact=localStorage.getItem("last_used_contact");
+    if(lastUsedContact==null || lastUsedContact==""){
+      window.location.href="/signup"
+    }
     if (token==null){
       window.location.href="#!/login";
     }

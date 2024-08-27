@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  
+  <link rel="stylesheet" href="/static/res/css/onsenui.min.css">
+  <link rel="stylesheet" href="/static/res/css/onsen-css-components.min.css">
+  
+  <!-- Substituindo Onsen UI JS por CDN -->
+  <script src="/static/res/js/onsenui.min.js"></script>
+
+  <!-- Substituindo Bootstrap CSS por CDN -->
+  <link rel="stylesheet" href="/static/bootstrap.min.css">
+  
+  <!-- Substituindo Bootstrap JS por CDN -->
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+  
+  <style>
+    #randomText{
+      background:linear-gradient(#111FBC,#8F1F6A,#8F1F6A);
+      transition:opacity 2.5s ease-in-out;
+      -webkit-background-clip: text;
+    }
+    .step1,.step2,.step3{
+      display: none ;
+    }
+    .stepForm{
+      margin-top:5pc;
+    }
+  </style>
+</head>
+
+<body>
+    <ons-page id="index" class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+   
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background:#fff;">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">pagoo </h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link active" aria-current="page" href="#home2"><h2>Criar Conta</h2></a>
+        <!--<a class="nav-link" href="#menu">menu</a>-->
+      </nav>
+      <h1 style="font-size: 30pt">
+        O Pagoo é muito mais 
+        <span id="randomText" style="color:#1849BE">Rápido </span>
+      </h1>
+      
+      <h2>Pagoo, a solução inovadora para fazer pagamentos em Moçambique</h2>
+    </div>
+    
+   <div class="stepForm">
+     <div class="step1">
+       <div class="form-floating mb-3">
+         <input type="text" class="form-control" id="userName">
+         <label for="">Insira o seu nome completo</label>
+       </div>
+       <div class="form-floating mb-3">
+         <input type="date" name="" class="form-control" id="birthDate">
+         <label for="">data de nascimento</label>
+       </div>
+     </div>
+     <div class="step2"> 
+     <div class="form-floating mb-3">
+       <input type="number" class="form-control" id="phoneNum">
+       <label for="">número de telefone</label>
+     </div>
+     
+     <div class="form-floating mb-3">
+       <input type="email" class="form-control" id="personEmail">
+       <label for="">insira o seu email</label>
+     </div>
+     </div>
+     <div class="step3">
+       
+     <div class="form-floating mb-3">
+       <select name="" id="accountType" class="form-control" >
+         <option selected disabled>Tipo de conta</option>
+         <option value="individual">conta pessoal</option>
+         <option value="business" disabled>conta para negócios</option>
+       </select>
+       <label for="">tipo de conta</label>
+     </div>
+     
+     <div class="form-floating mb-3">
+       <input type="password" class="form-control" id="password">
+       <label for="">cria uma palavra passe</label>
+     </div>
+     </div>
+     <font color="red"><small id="signError"></small></font>
+     <ons-row>
+       <ons-col width="50%">
+         <ons-button class="form-control" onclick="back ()">anterior </ons-button>
+       </ons-col>
+       <ons-col Width="50%">
+         <ons-button class="form-control" onclick="goNext()" id="next">próximo </ons-button>
+       </ons-col>
+     </ons-row><br>
+     <button class="btn btn-secondary form-control" onclick="window.location.href='/#!/login' ">já tenho conta</button>
+   </div> 
+  </header>
+</div>
+    </ons-page>
+    <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
+    <script>
+    if(localStorage.getItem('last_used_contact')!=null || localStorage.getItem("last_used_contact")!="" || sessionStorage.getItem("token")!=null){
+      window.location.href="/#!/login";
+    }
+    function makeError(error){
+      document.getElementById('signError').innerHTML=error;
+    }
+    function errorClean(){
+      document.getElementById('signError').innerHTML="";
+    }
+      const el=document.querySelector("#randomText");
+      const texts=["Flexível","Fácil","Seguro","Barato"];
+      var index=0;
+     function changeText(){
+       el.style.opacity="0";
+       el.innerHTML=texts[index];
+       el.style.opacity="1";
+       if (index==texts.length-1){
+         index=0;
+         return;
+       }
+       index++
+     }
+     setInterval(()=>{
+       changeText()
+     },1000*2.5);
+     var stepIndex=1;
+     var steps=3;
+     var canGoNext=true;
+     document.querySelector(`.step${stepIndex}`).style.display="block";
+     function activeStep(num){
+       for(let i=1;i<4;i++){
+         
+     document.querySelector(`.step${i}`).style.display="none";
+       }
+       document.querySelector(`.step${num}`).style.display="block";
+     }
+     const nextId=document.querySelector("#next");
+     function goNext(){
+       errorClean()
+       if(stepIndex==steps || !canGoNext){
+        var signData=form.getAll();
+        
+        if(!((signData.phone+'').length>8)){
+          
+          makeError("número inválido");
+          return;
+        }
+        try{
+        if(!(signData.email.split('@').length>0) || !(signData.email.split('@')[1].split(".").length>1)){
+          makeError('O email é inválido');
+          return;
+        }
+        }catch(error){
+          makeError('O email é inválido');
+        }
+        if((parseInt(new Date().getFullYear())-parseInt(signData.birthDate.split('/')[2]))<16){
+          makeError("Apenas usuário apartir dos 16 anos são permitidos");
+        }
+        if(signData.nome.split(" ").length<2){
+          makeError("Insira o seu nome completo");
+          return;
+        }
+        if(signData.password.length<6){
+          makeError("A sua palavra deve conter no mínimo 6 caracteres");
+          return;
+        }
+        if(["individual","business"].indexOf(signData._type)<0){
+          makeError("Selecione o tipo de conta!");
+          return;
+        }
+        const url_param="/auth/register/";
+     const body={
+       name:signData.nome.split(" ")[0],
+       surname:signData.nome.split(" ")[1],
+       birthdate:signData.birthDate,
+       email:signData.email,
+       phone:signData.phone,
+       password:signData.password,
+       country:"mozambique"
+     };
+     app_urls["register_url"]=url_param;
+     app_urls.request("register_url",body,(data)=>{
+       if(data.error){
+         makeError(data.msg);
+         return;
+       }
+       sessionStorage.setItem('token',data.token);
+       window.location.href("/");
+     })
+     
+         return;
+       }
+       if(stepIndex==steps-1){
+         
+         nextId.setAttribute("class","form-control btn btn-primary");
+         nextId.innerHTML="criar conta";
+         
+       }
+       stepIndex++;
+       activeStep(stepIndex);
+     }
+     function back(){
+       if(stepIndex==1){
+         return;
+       }
+       nextId.removeAttribute("class");
+       nextId.innerHTML="próximo "
+       nextId.setAttribute("class","form-control");
+       stepIndex--;
+       activeStep(stepIndex);
+     }
+     const form={
+       nome:"#userName",
+       phone:"#phoneNum",
+       email:"#personEmail",
+       birthDate:"#birthDate",
+       password:"#password",
+       _type:"#accountType",
+       getItem:(item)=>{
+         if(item=="birthDate"){
+           return form.formatDate(document.querySelector(form[item]).value);
+         }
+         return document.querySelector(form[item]).value;
+       },
+       formatDate:(date)=>{
+         var data=date.split("-");
+         if(data.length>0){
+           var newDate=data[2]+"/"+data[1]+"/"+data[0];
+           
+           return newDate;
+         }
+         return date;
+       },
+       getAll:()=>{
+         var data={};
+         var keys=Object.keys(form);
+         
+         for(i in keys){
+           delete keys[keys.indexOf('getAll')];
+           delete keys[keys.indexOf('getItem')];
+           
+           if(typeof keys[i]!=="undefined"){
+             try{
+              data[keys[i]]=form.getItem(keys[i]);
+             }
+             catch(e){
+               console.error("error:",e)
+             }
+           };
+           
+         }
+         return data;
+       }
+     }
+     
+    </script>
+</body>
+
+</html>
