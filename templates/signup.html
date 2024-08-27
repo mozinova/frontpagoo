@@ -106,9 +106,7 @@
     </ons-page>
     <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
     <script>
-    if(localStorage.getItem('last_used_contact')!=null || localStorage.getItem("last_used_contact")!="" || sessionStorage.getItem("token")!=null){
-      window.location.href="/#!/login";
-    }
+    
     function makeError(error){
       document.getElementById('signError').innerHTML=error;
     }
@@ -187,12 +185,17 @@
        country:"mozambique"
      };
      app_urls["register_url"]=url_param;
+     nextId.disabled=true;
+     nextId.innerHTML="<div class='spinner-border text-info'><span class='visually-hidden'>loading</span></div>";
      app_urls.request("register_url",body,(data)=>{
        if(data.error){
          makeError(data.msg);
+         nextId.innerHTML="próximo";
+         nextId.disabled="false";
          return;
        }
        sessionStorage.setItem('token',data.token);
+     
        window.location.href("/");
      })
      
