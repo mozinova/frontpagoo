@@ -95,6 +95,15 @@ const mainPageList=[
   ];
   
 
+const progressPage=document.getElementById("progressPage");
+function showProgress(){
+  progressPage.style.display="grid";
+}
+function hideProgress(){
+  progressPage.style.display="none";
+}
+hideProgress();
+
 const app_urls={
  
   change_password:"/user/change-password",
