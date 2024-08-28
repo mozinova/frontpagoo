@@ -96,6 +96,7 @@ const mainPageList=[
   
 
 const app_urls={
+ 
   change_password:"/user/change-password",
   baseurl:"https://itchy-sean-mozpay-889a750f.koyeb.app",
   history_url:'/user/history',

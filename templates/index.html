@@ -137,7 +137,8 @@ input,ons-button.form-control{
     if (token==null && lastUsedPhone!=null){
       window.location.href="#!/login";
     }
-    else if (lastUsedPhone==null){
+    var lastPhone=sessionStorage.getItem("last_used_phone")
+    else if (lastUsedPhone==null && lastPhone==null){
       window.location.href="/signup/";
     }
     

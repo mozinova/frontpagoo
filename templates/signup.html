@@ -106,7 +106,11 @@
     </ons-page>
     <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
     <script>
-    
+    function forceLogin(){
+      sessionStorage.setItem("last_used_phone","123456789");
+     
+      window.location.href="/#!/login";
+    }
     function makeError(error){
       document.getElementById('signError').innerHTML=error;
     }
@@ -184,14 +188,20 @@
        password:signData.password,
        country:"mozambique"
      };
-     app_urls["register_url"]=url_param;
      nextId.disabled=true;
      nextId.innerHTML="<div class='spinner-border text-info'><span class='visually-hidden'>loading</span></div>";
-     app_urls.request("register_url",body,(data)=>{
+     app_urls.request("signup_url",body,(data)=>{
        if(data.error){
          makeError(data.msg);
+         if(stepIndex==steps-1){
+           
+         nextId.innerHTML="criar conta";
+         }
+         else{
+           
          nextId.innerHTML="próximo";
-         nextId.disabled="false";
+         }
+         nextId.setAttribute("disabled",false);
          return;
        }
        sessionStorage.setItem('token',data.token);
