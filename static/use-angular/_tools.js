@@ -143,22 +143,27 @@ const app_urls={
       app_urls.options["body"]=JSON.stringify(obj);
     },
     request: function (url_name,body,callback){
-      console .log(this.options)
+      console.log(this.options)
       app_urls.put_body(body)
       var stat={};
+      showProgress();
       fetch(app_urls.get_url(url_name),app_urls.options).then((res)=>{
+
         if(!res.ok){
           console.log(res.status+":"+res.statusText)
           throw new Error("Falha ao fazer requisição para a url: "+app_urls.get_url(url_name));
           callback({error:true,msg:"Falha ao se conectar!"});
+          hideProgress()
           return;
         }
         return res.json();
       }).then((data)=>{
-       callback(data)
+       callback(data);
+       hideProgress();
       }).catch((err)=>{
         console.error(err);
         callback({error:true,msg:"Falha ao ligar!"});
+        hideProgress();
       });
     
     }
