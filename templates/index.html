@@ -134,11 +134,12 @@ input,ons-button.form-control{
     
     const lastUsedPhone=localStorage.getItem('last_used_contact');
     var lastPhone=sessionStorage.getItem("last_used_phone")
-    if (token==null && lastUsedPhone!=null){
-      window.location.href="#!/login";
-    }
+    
     if (lastUsedPhone==null && lastPhone==null){
       window.location.href="/signup/";
+    }
+    if (token==null && lastUsedPhone!=null){
+      window.location.href="#!/login";
     }
     
   }catch(e){
