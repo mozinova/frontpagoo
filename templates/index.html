@@ -133,12 +133,11 @@ input,ons-button.form-control{
     const token=window.sessionStorage.getItem("token");
     
     const lastUsedPhone=localStorage.getItem('last_used_contact');
-    
+    var lastPhone=sessionStorage.getItem("last_used_phone")
     if (token==null && lastUsedPhone!=null){
       window.location.href="#!/login";
     }
-    var lastPhone=sessionStorage.getItem("last_used_phone")
-    else if (lastUsedPhone==null && lastPhone==null){
+    if (lastUsedPhone==null && lastPhone==null){
       window.location.href="/signup/";
     }
     

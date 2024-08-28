@@ -99,16 +99,17 @@
          <ons-button class="form-control" onclick="goNext()" id="next">próximo </ons-button>
        </ons-col>
      </ons-row><br>
-     <button class="btn btn-secondary form-control" onclick="window.location.href='/#!/login' ">já tenho conta</button>
+     <button class="btn btn-secondary form-control" onclick="forceLogin()">já tenho conta</button>
    </div> 
   </header>
 </div>
     </ons-page>
     <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
+    <script src="/static/use-angular/_tools.js"></script>
     <script>
     function forceLogin(){
-      sessionStorage.setItem("last_used_phone","123456789");
-     
+      sessionStorage.setItem("last_used_phone","******");
+
       window.location.href="/#!/login";
     }
     function makeError(error){
@@ -162,9 +163,11 @@
         }
         }catch(error){
           makeError('O email é inválido');
+         return 
         }
         if((parseInt(new Date().getFullYear())-parseInt(signData.birthDate.split('/')[2]))<16){
           makeError("Apenas usuário apartir dos 16 anos são permitidos");
+          return 
         }
         if(signData.nome.split(" ").length<2){
           makeError("Insira o seu nome completo");
@@ -192,7 +195,7 @@
      nextId.innerHTML="<div class='spinner-border text-info'><span class='visually-hidden'>loading</span></div>";
      app_urls.request("signup_url",body,(data)=>{
        if(data.error){
-         makeError(data.msg);
+         makeError(data.msg?data.msg:data.error_msg);
          if(stepIndex==steps-1){
            
          nextId.innerHTML="criar conta";
@@ -201,13 +204,14 @@
            
          nextId.innerHTML="próximo";
          }
-         nextId.setAttribute("disabled",false);
+         nextId.removeAttribute("disabled");
          return;
        }
        sessionStorage.setItem('token',data.token);
-     
+       window.localStorage.setItem("last_used_contact",signData.phone);
+       window.localStorage.setItem('l_u_p',signData.password);
        window.location.href("/");
-     })
+     });
      
          return;
        }
