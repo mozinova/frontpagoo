@@ -135,19 +135,14 @@
      </div>
      <font color="red"><small id="signError"></small></font>
      <ons-row>
-       <ons-col width="50%">
-         <ons-button class="form-control" onclick="back ()">anterior </ons-button>
-       </ons-col>
-       <ons-col Width="50%">
-         <ons-button class="form-control" onclick="goNext()" id="next">próximo </ons-button>
-       </ons-col>
+         <ons-button class="form-control btn-primary" style="border-radius:30px" onclick="goNext()" id="next">próximo </ons-button>
+      
      </ons-row><br>
      <button class="btn btn-secondary form-control" onclick="forceLogin()">já tenho conta</button>
    </div> 
   </header>
 </div>
     </ons-page>
-    <script src="{{ url_for('static',filename='/use-angular/_tools.js')}}"></script>
     
  <script src="/static/js/sweetalert.min.js"></script>
  
@@ -206,18 +201,22 @@
         try{
         if(!(signData.email.split('@').length>0) || !(signData.email.split('@')[1].split(".").length>1)){
           makeError('O email é inválido');
+          activeStep(1);
           return;
         }
         }catch(error){
           makeError('O email é inválido');
+          activeStep(1);
          return 
         }
         if((parseInt(new Date().getFullYear())-parseInt(signData.birthDate.split('/')[2]))<16){
           makeError("Apenas usuário apartir dos 16 anos são permitidos");
+          activeStep(1);
           return 
         }
         if(signData.nome.split(" ").length<2){
           makeError("Insira o seu nome completo");
+          activeStep(1);
           return;
         }
         if(signData.password.length<6){
@@ -226,6 +225,7 @@
         }
         if(["individual","business"].indexOf(signData._type)<0){
           makeError("Selecione o tipo de conta!");
+          activeStep(1);
           return;
         }
         const url_param="/auth/register/";

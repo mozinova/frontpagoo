@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+  body,html{
+    margin:0pc;
+    padding:0pc;
+    height:29.7cm;
+    width:20cm;
+    font-size:12;
+  }
+  .page{
+    position:relative;
+    margin:2.54cm 2.54cm 2.54cm 2.54cm;
+    height: ;
+    width:17.46cm;
+    height:27.24cm;
+  }
+  #progressPage{
+  z-index:999999;
+  top:0px;
+  left:0px;
+  right:0;
+  bottom:0;
+  position: fixed ;
+  background: transparent ;
+}
+.progressContainer{
+  display: grid;
+  place-items: center;
+  height:100vh;
+}
+
+.loading {
+    border: 50px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 50px solid #3498db;
+    width: 100px;
+    height: 100px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    margin: 20px auto;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+    
+  </style>
+</head>
+
+<body>
+    <div id="progressPage">
+    <div class="progressContainer">
+     
+    <div class="loading"></div>
+    </div>
+    </div>
+    
+  <script>
+    function formatPageNum(){
+      document.querySelectorAll("div.page").forEach((el)=>{
+        const pageNum=el.getAttribute("data-pageNum");
+        const spanBottom=document.createElement("span");
+        spanBottom.style.position="absolute";
+        spanBottom.style.bottom="4pc";
+        spanBottom.innerHTML=`<b>pagina: ${pageNum}</b>`;
+        el.appendChild(spanBottom);
+      //  alert(pageNum)
+      });
+    }
+    
+  function breakDownText(text, chars){
+    const numsOfBreaks=(text.length/chars).toFixed(0);
+    const breaks=[];
+    var brekNum=1;
+    for(i=0;i<numsOfBreaks;i++){
+      breaks.push(text.substring((brekNum*chars)-chars,brekNum * chars));
+      if(brekNum==numsOfBreaks){
+        break;
+      }
+      brekNum++;
+    }
+    return breaks;
+  }
+  </script>
+  <script>
+   var num_pages=0;
+   
+  const indexs={};
+    
+    const body=document.body;
+    var url="/docmaker/mini";
+    function query(qr){
+      return url.concat("?qr="+qr)
+      
+    }
+    let models=["1. Docmaker mini( rápido para trabalhos pequenos)\n","2. Docmaker Turbo (melhor para trabalhos grandes, porém é lento)"];
+    
+    var model=prompt(`selecione o modelo:\n${models.join('')}`);
+    qr=""
+    if(model=="1"){
+      url="/docmaker/mini"
+      qr=prompt("Insira o tema do trabalho de pesquisa:")
+    }
+    else if (model=="2"){
+      url="/docmaker/turbo"
+      qr=prompt("Insira o tema do trabalho de pesquisa:")
+    
+    }
+    else{
+      alert("Escolha inválida.")
+      
+    }
+    
+    function addPage(txt){
+      num_pages++;
+      var pageTxt=`<div class="page" data-pageNum="${num_pages}">${txt}</div>`;
+      body.innerHTML+=pageTxt
+    }
+    function restore(){
+      body.innerHTML="";
+    }
+    
+    fetch(query(qr)).then((res)=>{
+      if(res.ok){
+        return res.text();
+      }
+      else {
+        document.body.innerHTML="<h1><a onclick='location.reload()' href='#'>Erro, Tentar novamante</a>";
+        console.log(res)
+        throw new Error("error");
+      }
+    }).then((txt)=>{
+      restore()
+      addPage("<h1>Índice</h1>")
+    const replaceIt = (txt) => {
+  // Substitui todas as ocorrências de [[[ por <h3>
+  txt = txt.replace(/\[\[\[/g, "<h3>");
+  txt=txt.replace(/\]\]\]/g,"</h3>").replace(/<<</g,"<p>");
+  txt=txt.replace(/>>>/g,"</p>");
+  txt=txt.replace(/{{/g,"<a href='#'>").replace(/}}/g,"</a>");
+  // Verifica se ainda há [[[ no texto
+  if (txt.match(/\[\[\[/)) {
+    return replaceIt(txt);
+  } else {
+    return txt;
+  }
+}
+
+txt = replaceIt(txt);
+      var pages = txt.split('[[');
+console.log(pages.length);
+for (x in pages) {
+  
+  if (pages[x] !== "") {
+    
+    pages[x] = `<h1>` + pages[x];
+    pages[x] = pages[x].replace(/]]/g, "</h1>").replace(/<</g, "<p>").replace(/>>/g, "</p>");
+    var allParts = pages[x].split("[");
+    for (i in allParts) {
+      allParts[i] = "<h2>" + allParts[i];
+      allParts[i] = allParts[i].replace(new RegExp("]","g"), "</h2>");
+     if(allParts[i].length>100){
+       if(allParts[i].length>1300){
+          var breaks = breakDownText(allParts[i], 1350);
+ for (x in breaks) {
+   addPage(breaks[x]);
+ }
+ 
+       }
+       else{
+       addPage(allParts[i]);
+       }
+    /*  var breaks=breakDownText(allParts[i],1500);
+      for(x in breaks){
+        addPage(breaks[x]);
+      }*/
+     }
+    }
+  }
+}
+
+  (function makeIndex(){
+      var indexPage=null;
+      document.querySelectorAll("h1,h2").forEach((el)=>{
+        
+        if(el.innerHTML!=""){
+          const parentElement=el.parentElement;
+          if(parentElement.getAttribute("data-pageNum")=="1"){
+            indexPage=parentElement;
+          }
+          indexs[el.innerHTML]=parentElement.getAttribute("data-pageNum");
+        }
+        
+      });
+      const gMany=(txt,howMany)=>{
+        var int=txt;
+        for(let i=0;i<howMany;i++){
+          int+=txt
+        }
+        return int;
+      }
+      const list=document.createElement("ul");
+      list.style.listStyleType="decimal"
+      indexPage.append(list);
+  //   console.log(indexs)
+      for(i in Object.keys(indexs)){
+        
+        var hn=140-parseInt(Object.keys(indexs)[i].length*3)
+        
+        const li=document.createElement("li");
+        li.append(Object.keys(indexs)[i]+""+gMany(".",hn)+""+indexs[Object.keys(indexs)[i]]) 
+        
+        list.append(li)
+        
+      }
+      formatPageNum();
+    })();
+    
+    }).catch((e)=>{
+      console.log(e)
+        document.body.innerHTML="<h1><a onclick='location.reload()' href='#'>Erro, Tentar novamante</a>"
+    });
+    
+    
+  </script>
+</body>
+
+</html>
